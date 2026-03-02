@@ -1,0 +1,14 @@
+{
+  "name": "single-page",
+  "module": "index.html",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "preview": "bun index.html",
+    "style": "bunx @tailwindcss/cli -i ./src/input.css -o ./dist/output.css --watch"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.18",
+    "tailwindcss": "^4.1.18"
+  }
+}
