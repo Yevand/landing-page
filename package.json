@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "preview": "bun index.html",
-    "style": "bunx @tailwindcss/cli -i ./src/input.css -o ./dist/output.css --watch"
+    "tailwind:watch": "bunx @tailwindcss/cli -i ./src/input.css -o ./dist/output.css --watch",
+    "tailwind:build": "bunx @tailwindcss/cli -i ./src/input.css -o ./dist/output.css"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.18",
