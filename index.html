@@ -9,71 +9,184 @@
 </head>
 
 <body class="bg-gray-50">
+  <script id="translations" type="application/json">
+    {
+      "heading-level-one": "Explore our premium fleet of top-tier models",
+      "explore-cars-section-heading": "Find your perfect match in our gallery",
+      "logo": {"aria-label": "Logo"},
+      "step-1": { "label": "Explore", "url": "https://www.volkswagen.co.uk/en/new.html" },
+      "step-2": { "label": "Service", "url": "https://www.volkswagen.co.uk/en/owners-and-services/service-booking.html" },
+      "step-3": { "label": "Retailer", "url": "https://www.volkswagen.co.uk/en/find-a-volkswagen-retailer.html" },
+      "step-4": { "label": "Magazine", "url": "https://www.volkswagen.co.uk/en/life/magazine.html" },
+      "new-tag": {"label": "NEW", "text-color": "white", "bg-color": "#60A5FA"},
+      "promotion-tag": {"label": "Promoted", "text-color": "white", "bg-color": "#FCD303"},
+      "login-icon": {"aria-label": "Login", "url": "https://www.volkswagen.co.uk/en/myvolkswagen.html"},
+      "car-1": {"heading": "Polo", "paragraph": "Big on fun, tech, style, space, comfort, and confidence", "url": "https://www.volkswagen.co.uk/en/new/polo.html"},
+      "car-2": {"heading": "T-roc", "paragraph": "Sporty. flexible, comfortable", "url": "https://www.volkswagen.co.uk/en/new/t-roc.html"},
+      "car-3": {"heading": "Touareg", "paragraph": "Sporty, classy, elegant", "url": "https://www.volkswagen.co.uk/en/new/touareg.html"},
+      "car-4": {"heading": "Tourer", "paragraph": "Luxury goes a long way with the ID.7", "url": "https://www.volkswagen.co.uk/en/electric-and-hybrid/electric-cars/id7-tourer.html"},
+      "car-5": {"heading": "Cabrio", "paragraph": "Experience a whole new sense of freedom", "url": "https://www.volkswagen.co.uk/en/new/t-roc-cabriolet.html"}
+    }
+  </script>
+  <script>
+    function useTranslations() {
+      const i18n = document.getElementById('translations');
+      const translations = JSON.parse(i18n.textContent);
+
+      const headingLevelOne = document.querySelector('h1');
+      if (!translations["heading-level-one"]) headingLevelOne.hidden;
+      headingLevelOne.textContent = translations["heading-level-one"];
+
+      const exploreCarsSectionHeading = document.getElementById("explore-cars-section-heading");
+      if (!translations["explore-cars-section-heading"]) exploreCarsSectionHeading.hidden;
+      exploreCarsSectionHeading.textContent = translations["explore-cars-section-heading"];
+
+      const logo = document.getElementById('logo');
+      if (!translations['logo']) logo.hidden;
+      logo.ariaLabel = translations['logo']["aria-label"];
+
+
+      ['login-icon'].forEach((key) => {
+        const icon = document.getElementById(key);
+        if (!translations[key]) icon.hidden;
+        icon.ariaLabel = translations[key]["aria-label"];
+        icon.href = translations[key].url;
+      });
+
+      ['step-1', 'step-2', 'step-3', 'step-4'].forEach((key) => {
+        const step = document.getElementById(key);
+        if (!translations[key]) step.hidden;
+        step.textContent = translations[key].label;
+        step.href = translations[key].url;
+      });
+
+      ['car-1', 'car-2', 'car-3', 'car-4', 'car-5'].forEach((key) => {
+        const car = document.getElementById(key);
+        if (!translations[key]) car.hidden;
+        const image = car.querySelector('img');
+        const heading = car.querySelector('h3');
+        const paragraph = car.querySelector('p');
+        const link = car.querySelector('a');
+        image.alt = translations[key].heading;
+        heading.textContent = translations[key].heading;
+        paragraph.textContent = translations[key].paragraph;
+        link.href = translations[key].url;
+      });
+
+      ['new-tag', 'promotion-tag'].forEach((key) => {
+        const tag = document.getElementById(key);
+        if (!translations[key]) tag.hidden;
+        const background = tag.querySelector('rect');
+        const text = tag.querySelector('text');
+        text.textContent = translations[key].label;
+        text.setAttribute('fill', translations[key]['text-color']);
+        background.setAttribute('fill', translations[key]['bg-color']);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', useTranslations);
+  </script>
   <header class="flex w-full h-24 bg-black mb-8 items-center justify-center p-4">
     <div class="flex w-full max-w-6xl items-center justify-between h-17 text-white font-lato">
       <span class="w-auto h-5 flex items-center">
-        <p class="hidden sm:block">
-          Premium&nbsp;<span class="bg-[#4A90E2] px-2 py-0.5 rounded-[3px] text-xs font-bold">CAR</span>
+        <p id="logo" class="hidden sm:block">
+          Premium&nbsp;<span class="bg-blue-400 px-2 py-0.5 rounded-[3px] text-xs font-bold">CAR</span>
         </p>
       </span>
       <nav class="flex flex-1 sm:flex-initial justify-center gap-4 sm:gap-10">
-        <button class="hover:text-blue-400">Home</button>
-        <button class="hover:text-blue-400">Recipes</button>
-        <button class="hover:text-blue-400">Article</button>
-        <button class="hover:text-blue-400">Contact</button>
-        <button class="hover:text-blue-400">Purchase</button>
+        <a id="step-1" class="hover:text-blue-400" href=""></a>
+        <a id="step-2" class="hover:text-blue-400" href=""></a>
+        <a id="step-3" class="hover:text-blue-400" href=""></a>
+        <a id="step-4" class="hover:text-blue-400" href=""></a>
+        <a id="step-5" class="hover:text-blue-400" href=""></a>
       </nav>
-      <button class="w-5 h-5 flex items-center justify-center">
-        <img src="./media/search-icon.svg" alt="search" class="invert">
-      </button>
+      <a id="login-icon" class="w-7 h-7 flex items-center justify-center">
+        <img src="./icons/login-icon.jpg" alt="search" class="invert">
+      </a>
     </div>
   </header>
-
+  <h1 class="flex justify-center text-center text-balance font-bold text-shadow-black/80 text-3xl mb-5"></h1>
+  <h2 id="explore-cars-section-heading"
+    class="flex justify-center text-center text-balance font-normal text-shadow-black/80 text-2xl mb-5"></h2>
   <section
     class="grid grid-cols-1 gap-6 justify-self-center max-w-6xl w-full px-4 mb-3 md:grid-cols-2 md:grid-rows-2 lg:grid-cols-3">
-
-    <div class="relative overflow-hidden rounded-lg md:row-span-2 h-100 md:h-auto">
-      <img class="w-full h-full object-cover" src="./media/car-1.png" alt="car-1">
-      <img class="absolute top-7 left-5" src="./media/tag.png" />
-      <div class="absolute bottom-0 p-6 bg-linear-to-t from-black/80 to-transparent w-full">
-        <p class="text-white/70 font-normal text-[14px]">Rickie Baroch - June 6, 2019</p>
-        <p class="text-white font-bold leading-tight">One of Saturn’s largest rings may be newer than anyone</p>
+    <div id="car-1" class="relative overflow-hidden rounded-lg md:row-span-2 h-100 md:h-auto">
+      <a class="w-full h-full" href="">
+        <img class="w-full h-full object-cover" src="./media/polo.jpeg" alt="">
+      </a>
+      <svg id="new-tag" class="absolute top-7 left-5" width="60" height="20" viewBox="0 0 60 20"
+        xmlns="http://www.w3.org/2000/svg">
+        <rect width="100%" height="100%" rx="3" fill="" />
+        <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="sans-serif"
+          font-size="10" font-weight="bold">
+        </text>
+      </svg>
+      <div class="absolute p-3 bottom-0 bg-linear-to-t from-black/80 to-transparent w-full">
+        <h3 class="text-white/70 font-normal text-[14px]"></h3>
+        <p class="text-white font-bold leading-tight"></p>
       </div>
     </div>
 
-    <div class="relative overflow-hidden rounded-lg h-62 md:h-auto md:col-start-2 md:row-start-1">
-      <img class="w-full h-full object-cover" src="./media/car-2.png" alt="car-2">
-      <img class="absolute top-7 left-5" src="./media/tag.png" />
-      <div class="absolute bottom-0 p-6bg-linear-to-t from-black/80 to-transparent w-full">
-        <p class="text-white/70 font-normal text-[14px]">Rickie Baroch - June 6, 2019</p>
-        <p class="text-white font-bold">One of Saturn’s largest rings may be newer than anyone</p>
+    <div id="car-2" class="relative overflow-hidden rounded-lg h-62 md:h-auto md:col-start-2 md:row-start-1">
+      <a class="w-full h-full" href="">
+        <img class="w-full h-full object-cover" src="./media/t-roc.jpeg" alt="">
+      </a>
+      <rect width="100%" height="100%" rx="3" fill="#60A5FA" />
+      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="" font-family="sans-serif"
+        font-size="10" font-weight="bold">
+      </text>
+      </svg>
+      <div class="absolute p-3 bottom-0 p-6bg-linear-to-t from-black/80 to-transparent w-full">
+        <h3 class="text-white/70 font-normal text-[14px]"></h3>
+        <p class="text-white font-bold"></p>
       </div>
     </div>
 
-    <div class="relative overflow-hidden rounded-lg  h-62 md:h-auto md:col-start-2 md:row-start-2">
-      <img class="w-full h-full object-cover" src="./media/car-3.png" alt="car-3">
-      <img class="absolute top-7 left-5" src="./media/tag.png" />
-      <div class="absolute bottom-0 p-6bg-linear-to-t from-black/80 to-transparent w-full">
-        <p class="text-white/70 font-normal text-[14px]">Rickie Baroch - June 6, 2019</p>
-        <p class="text-white font-bold">One of Saturn’s largest rings may be newer than anyone</p>
+    <div id="car-3" class="relative overflow-hidden rounded-lg  h-62 md:h-auto md:col-start-2 md:row-start-2">
+      <a class="w-full h-full" href="">
+        <img class="w-full h-full object-cover" src="./media/touareg.jpeg" alt="">
+      </a>
+      <rect width="100%" height="100%" rx="3" fill="#60A5FA" />
+      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="sans-serif"
+        font-size="10" font-weight="bold">
+
+      </text>
+      </svg>
+      <div class="absolute p-3 bottom-0 p-6bg-linear-to-t from-black/80 to-transparent w-full">
+        <h3 class="text-white/70 font-normal text-[14px]"></h3>
+        <p class="text-white font-bold"></p>
       </div>
     </div>
 
-    <div class="relative overflow-hidden rounded-lg md:hidden lg:block">
-      <img class="w-full h-full object-cover" src="./media/car-4.png" alt="car-4">
-      <img class="absolute top-7 left-5" src="./media/tag.png" />
-      <div class="absolute bottom-0 p-6bg-linear-to-t from-black/80 to-transparent w-full">
-        <p class="text-white/70 font-normal text-[14px]">Rickie Baroch - June 6, 2019</p>
-        <p class="text-white font-bold">One of Saturn’s largest rings may be newer than anyone</p>
+    <div id="car-4" class="relative overflow-hidden rounded-lg md:hidden lg:block">
+      <a class="w-full h-full" href="">
+        <img class="w-full h-full object-cover" src="./media/tourer.jpeg" alt="">
+      </a>
+      <rect width="100%" height="100%" rx="3" fill="" />
+      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="" font-family="sans-serif"
+        font-size="10" font-weight="bold">
+      </text>
+      </svg>
+      <div class="absolute p-3 bottom-0 p-6bg-linear-to-t from-black/80 to-transparent w-full">
+        <h3 class="text-white/70 font-normal text-[14px]"></h3>
+        <p class="text-white font-bold"></p>
       </div>
     </div>
 
-    <div class="relative overflow-hidden rounded-lg md:hidden lg:block">
-      <img class="w-full h-full object-cover" src="./media/car-5.png" alt="car-4">
-      <img class="absolute top-7 left-5" src="./media/tag.png" />
-      <div class="absolute bottom-0 p-6bg-linear-to-t from-black/80 to-transparent w-full">
-        <p class="text-white/70 font-normal text-[14px]">Rickie Baroch - June 6, 2019</p>
-        <p class="text-white font-bold">One of Saturn’s largest rings may be newer than anyone</p>
+    <div id="car-5" class="relative overflow-hidden rounded-lg md:hidden lg:block">
+      <a class="w-full h-full" href="">
+        <img class="w-full h-full object-cover" src="./media/cabrio.jpeg" alt="">
+      </a>
+      <svg id="promotion-tag" class="absolute top-7 left-5" width="60" height="20" viewBox="0 0 60 20"
+        xmlns="http://www.w3.org/2000/svg">
+        <rect width="100%" height="100%" rx="3" fill="#60A5FA" />
+        <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="sans-serif"
+          font-size="10" font-weight="bold">
+        </text>
+      </svg>
+      <div class="absolute p-3 bottom-0 p-6bg-linear-to-t from-black/80 to-transparent w-full">
+        <h3 class="text-white/70 font-normal text-[14px]"></h3>
+        <p class="text-white font-bold"></p>
       </div>
     </div>
     </div>
